@@ -1,0 +1,22 @@
+{
+  "overview": "A business dashboard for suit sellers to track daily revenue, manage customers, and monitor key business metrics at a glance.",
+  "features": [
+    "Revenue tracking with trend charts",
+    "Customer management with transaction history",
+    "Daily business metrics and analytics",
+    "Protected login via Internet Identity",
+    "Add/edit/delete revenue entries and customers",
+    "Responsive dashboard with mobile support"
+  ],
+  "category": "productivity",
+  "tags": [
+    "dashboard",
+    "revenue",
+    "customers",
+    "analytics",
+    "business",
+    "suits",
+    "sales"
+  ],
+  "last_updated": "2026-04-08T16:35:20.953Z"
+}

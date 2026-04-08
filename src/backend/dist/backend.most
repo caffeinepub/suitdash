@@ -1,0 +1,42 @@
+// Version: 1.0.0
+type CustomerId__1015005394 = Nat;
+type Customer__225412617 =
+  {
+    createdAt : Timestamp__301639476;
+    email : Text;
+    id : CustomerId__1015005394;
+    lastPurchaseDate : ?Timestamp__301639476;
+    name : Text;
+    notes : Text;
+    phone : Text;
+    totalSpent : Float
+  };
+type EntryId__144056575 = Nat;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type RevenueEntry__442644438 =
+  {
+    amount : Float;
+    createdAt : Timestamp__301639476;
+    customerId : CustomerId__1015005394;
+    customerName : Text;
+    date : Timestamp__301639476;
+    id : EntryId__144056575;
+    itemDescription : Text;
+    notes : Text
+  };
+type Timestamp__301639476 = Int;
+actor {
+  stable customers :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Customer__225412617]];
+      var elementIndex : Nat__490723111
+    };
+  stable entries :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?RevenueEntry__442644438]];
+      var elementIndex : Nat__490723111
+    }
+};

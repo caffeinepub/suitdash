@@ -1,0 +1,121 @@
+type UpdateEntryRequest = 
+ record {
+   amount: float64;
+   customerId: CustomerId;
+   customerName: text;
+   date: Timestamp;
+   id: EntryId;
+   itemDescription: text;
+   notes: text;
+ };
+type UpdateCustomerRequest = 
+ record {
+   email: text;
+   id: CustomerId;
+   name: text;
+   notes: text;
+   phone: text;
+ };
+type TopCustomer = 
+ record {
+   customer: Customer;
+   totalSpent: float64;
+ };
+type Timestamp = int;
+type RevenueSummary = 
+ record {
+   averageTransactionValue: float64;
+   dailyTotal: float64;
+   totalRevenue: float64;
+   transactionCount: nat;
+ };
+type RevenueEntry = 
+ record {
+   amount: float64;
+   createdAt: Timestamp;
+   customerId: CustomerId;
+   customerName: text;
+   date: Timestamp;
+   id: EntryId;
+   itemDescription: text;
+   notes: text;
+ };
+type PeriodMetrics = 
+ record {
+   endDate: Timestamp;
+   period: text;
+   startDate: Timestamp;
+   totalRevenue: float64;
+   transactionCount: nat;
+ };
+type EntryId = nat;
+type DateRangeFilter = 
+ record {
+   from: Timestamp;
+   to: Timestamp;
+ };
+type DailyRevenue = 
+ record {
+   count: nat;
+   date: Timestamp;
+   total: float64;
+ };
+type DailyComparison = 
+ record {
+   today: float64;
+   todayCount: nat;
+   yesterday: float64;
+   yesterdayCount: nat;
+ };
+type CustomerId = nat;
+type Customer = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   id: CustomerId;
+   lastPurchaseDate: opt Timestamp;
+   name: text;
+   notes: text;
+   phone: text;
+   totalSpent: float64;
+ };
+type AddEntryRequest = 
+ record {
+   amount: float64;
+   customerId: CustomerId;
+   customerName: text;
+   date: Timestamp;
+   itemDescription: text;
+   notes: text;
+ };
+type AddCustomerRequest = 
+ record {
+   email: text;
+   name: text;
+   notes: text;
+   phone: text;
+ };
+service : {
+  addCustomer: (req: AddCustomerRequest) -> (Customer);
+  addRevenueEntry: (req: AddEntryRequest) -> (RevenueEntry);
+  deleteCustomer: (id: CustomerId) -> (bool);
+  deleteRevenueEntry: (id: EntryId) -> (bool);
+  getAllCustomers: () -> (vec Customer) query;
+  getAllRevenueEntries: () -> (vec RevenueEntry) query;
+  getCustomer: (id: CustomerId) -> (opt Customer) query;
+  getCustomerTransactions: (customerId: CustomerId) ->
+   (vec RevenueEntry) query;
+  getDailyComparison: () -> (DailyComparison) query;
+  getMonthlyRevenue: () -> (float64) query;
+  getPeriodMetrics: (period: text) -> (PeriodMetrics) query;
+  getRevenueByDay: (days: nat) -> (vec DailyRevenue) query;
+  getRevenueEntriesByCustomer: (customerId: CustomerId) ->
+   (vec RevenueEntry) query;
+  getRevenueEntriesByDateRange: (filter: DateRangeFilter) ->
+   (vec RevenueEntry) query;
+  getRevenueSummary: () -> (RevenueSummary) query;
+  getTopCustomers: (n: nat) -> (vec TopCustomer) query;
+  searchCustomers: (nameQuery: text) -> (vec Customer) query;
+  updateCustomer: (req: UpdateCustomerRequest) -> (bool);
+  updateRevenueEntry: (req: UpdateEntryRequest) -> (bool);
+}
